@@ -1,14 +1,12 @@
 package com.fabpps.mydeeplinktester.ui
 
 import android.os.Bundle
-import android.view.KeyEvent
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import com.fabpps.mydeeplinktester.R
 import com.fabpps.mydeeplinktester.databinding.ActivityMainBinding
-import com.fabpps.mydeeplinktester.utils.extensions.onDone
 import com.fabpps.mydeeplinktester.utils.extensions.setOnClickListenerWithDelay
 
 class MainActivity : AppCompatActivity() {
