@@ -1,4 +1,4 @@
-package com.fabpps.mydeeplinktester.utils.extensions
+package com.fabpps.deeplinkexecutor.utils.extensions
 
 import android.os.SystemClock
 import android.view.View

@@ -1,6 +1,6 @@
-package com.fabpps.mydeeplinktester.di.modules
+package com.fabpps.deeplinkexecutor.di.modules
 
-import com.fabpps.mydeeplinktester.ui.MainViewModel
+import com.fabpps.deeplinkexecutor.ui.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

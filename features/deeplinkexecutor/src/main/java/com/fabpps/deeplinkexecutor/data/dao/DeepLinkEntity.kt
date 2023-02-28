@@ -1,4 +1,4 @@
-package com.fabpps.mydeeplinktester.data.dao
+package com.fabpps.deeplinkexecutor.data.dao
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

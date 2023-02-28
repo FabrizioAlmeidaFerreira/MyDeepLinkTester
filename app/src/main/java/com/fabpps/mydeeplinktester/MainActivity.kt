@@ -1,15 +1,15 @@
-package com.fabpps.mydeeplinktester.ui
+package com.fabpps.mydeeplinktester
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.fabpps.mydeeplinktester.R
 import com.fabpps.mydeeplinktester.databinding.ActivityMainBinding
-import com.fabpps.mydeeplinktester.utils.extensions.setOnClickListenerWithDelay
 
 class MainActivity : AppCompatActivity() {
+
+    //private val mainViewModel: MainViewModel by viewModel()
 
     private lateinit var binding: ActivityMainBinding
 
@@ -25,14 +25,16 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-        getCurrentDeepLink()
+        //getCurrentDeepLink()
+
+       // mainViewModel.testKoin()
     }
 
-    private fun getCurrentDeepLink() {
+    /*private fun getCurrentDeepLink() {
         binding.mdltBtnSendDeepLink.setOnClickListenerWithDelay {
             println("Texto digitado = ${binding.txtInputDeepLink.text}")
         }
-    }
+    }*/
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

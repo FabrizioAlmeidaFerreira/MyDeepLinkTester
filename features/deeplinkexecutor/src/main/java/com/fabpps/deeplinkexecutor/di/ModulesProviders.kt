@@ -1,6 +1,6 @@
-package com.fabpps.mydeeplinktester.di
+package com.fabpps.deeplinkexecutor.di
 
-import com.fabpps.mydeeplinktester.di.modules.ViewModelModules
+import com.fabpps.deeplinkexecutor.di.modules.ViewModelModules
 
 class ModulesProviders {
 

@@ -1,4 +1,4 @@
-package com.fabpps.mydeeplinktester.data.dto
+package com.fabpps.deeplinkexecutor.data.dto
 
 data class DeepLinkDTO(
     val deepLink: String,
