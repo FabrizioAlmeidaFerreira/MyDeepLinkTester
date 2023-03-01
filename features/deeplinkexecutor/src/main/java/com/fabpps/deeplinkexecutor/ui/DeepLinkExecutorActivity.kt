@@ -6,11 +6,15 @@ import android.view.MenuItem
 import com.fabpps.deeplinkexecutor.R
 import com.fabpps.deeplinkexecutor.databinding.DeepLinkExecutorActivityBinding
 import com.fabpps.deeplinkexecutor.ui.base.BaseInjectActivity
+import com.fabpps.deeplinkexecutor.utils.extensions.setOnClickListenerWithDelay
 import com.google.android.material.snackbar.Snackbar
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DeepLinkExecutorActivity: BaseInjectActivity() {
 
     private lateinit var binding: DeepLinkExecutorActivityBinding
+
+    private val viewModel: DeepLinkExecutorViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +26,10 @@ class DeepLinkExecutorActivity: BaseInjectActivity() {
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+        }
+
+        binding.mdltBtnSendDeepLink.setOnClickListenerWithDelay {
+            viewModel.saveDeepLink()
         }
     }
 

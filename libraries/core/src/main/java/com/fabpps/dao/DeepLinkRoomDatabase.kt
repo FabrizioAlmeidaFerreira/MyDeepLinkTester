@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.fabpps.data.dao.DeepLinkEntity
 
 @Database(entities = [DeepLinkEntity::class], version = 1, exportSchema = false)
-public abstract class DeepLinkRoomDatabase : RoomDatabase() {
+abstract class DeepLinkRoomDatabase : RoomDatabase() {
 
     abstract fun deepLinkDao() : DeepLinkDao
 
