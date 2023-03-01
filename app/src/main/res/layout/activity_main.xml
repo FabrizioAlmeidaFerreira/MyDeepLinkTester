@@ -1,76 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fabpps.mydeeplinktester.MainActivity">
+    android:background="@color/primary_color"
+    tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="@dimen/size_0"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.MyDeepLinkTester.AppBarOverlay">
+        android:importantForAccessibility="no"
+        android:layout_marginTop="@dimen/margin_64"
+        android:layout_marginBottom="@dimen/margin_64"
+        android:layout_marginStart="@dimen/margin_64"
+        android:layout_marginEnd="@dimen/margin_64"
+        android:src="@drawable/ic_deep_link"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.MyDeepLinkTester.PopupOverlay" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_main">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtInputLayoutDeepLink"
-            android:layout_width="@dimen/size_0"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_32"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtInputDeepLink"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="@dimen/size_60"
-                android:hint="Digite seu deep link"
-                android:textSize="@dimen/text_size_16"
-                android:imeOptions="actionSend"
-                android:inputType="textMultiLine"
-                android:maxLines="20"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/mdlt_btn_send_deep_link"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_32"
-            android:text="@string/mdlt_button_send_deep_lnk_label"
-            app:layout_constraintEnd_toEndOf="@+id/txtInputLayoutDeepLink"
-            app:layout_constraintStart_toStartOf="@+id/txtInputLayoutDeepLink"
-            app:layout_constraintTop_toBottomOf="@+id/txtInputLayoutDeepLink" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

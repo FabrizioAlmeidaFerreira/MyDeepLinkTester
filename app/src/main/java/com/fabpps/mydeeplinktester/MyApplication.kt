@@ -9,8 +9,5 @@ class MyApplication : Application() {
         super.onCreate()
 
         initFeaturesModules(application = this@MyApplication)
-        /*com.fabpps.deeplinkexecutor.init.DeepLinkFeature.init(
-            params = com.fabpps.deeplinkexecutor.init.FeatureParams(this@MyApplication)
-        )*/
     }
 }

@@ -90,4 +90,5 @@ dependencies {
     androidTestImplementation 'androidx.room:room-testing:2.5.0'
 
     implementation project(":features:deeplinkexecutor")
+    implementation project(":libraries:theme")
 }
