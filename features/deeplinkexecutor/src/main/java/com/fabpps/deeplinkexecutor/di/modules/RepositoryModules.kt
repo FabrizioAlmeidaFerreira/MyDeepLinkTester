@@ -1,14 +1,13 @@
 package com.fabpps.deeplinkexecutor.di.modules
 
-import com.fabpps.deeplinkexecutor.domain.repository.SaveDeepLinkRepository
-import com.fabpps.extensions.DefaultDispatcherProvider
+import com.fabpps.deeplinkexecutor.data.repository.DeepLinkDaoRepository
 import org.koin.dsl.module
 
 class RepositoryModules {
 
-    fun provides() = listOf(saveDeepLinkRepository)
+    fun provides() = listOf(deepLinkDaoRepository)
 
-    private val saveDeepLinkRepository = module {
-        factory { SaveDeepLinkRepository(get(), DefaultDispatcherProvider()) }
+    private val deepLinkDaoRepository = module {
+        factory { DeepLinkDaoRepository(get()) }
     }
 }

@@ -3,7 +3,7 @@
     <style name="Theme.MyDeepLinkTester" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary_color</item>
-        <item name="colorPrimaryVariant">@color/color_primary_variant</item>
+        <item name="colorPrimaryVariant">@color/primary_color_variant</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -23,4 +23,18 @@
     <style name="Theme.MyDeepLinkTester.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.MyDeepLinkTester.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.MyDeepLinkTester.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+    </style>
+
+    <style name="Theme.MyDeepLinkTester.TextInputEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorLink">@color/white</item>
+        <item name="android:textColorHighlight">@color/white</item>
+        <item name="android:imeOptions">actionSend</item>
+        <item name="android:inputType">textMultiLine</item>>
+        <item name="android:maxLines">8</item>
+    </style>
 </resources>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mdlt_button_error">erro deep link não encontrou aplicação</string>
+</resources>

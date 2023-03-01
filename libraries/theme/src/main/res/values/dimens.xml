@@ -5,8 +5,10 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
     <dimen name="margin_32">32dp</dimen>
     <dimen name="margin_64">64dp</dimen>
 
     <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
 </resources>

@@ -1,11 +1,11 @@
 package com.fabpps.deeplinkexecutor.domain.usecase
 
 import com.fabpps.data.dao.DeepLinkEntity
-import com.fabpps.deeplinkexecutor.domain.repository.SaveDeepLinkRepository
+import com.fabpps.deeplinkexecutor.data.repository.DeepLinkDaoRepository
 
 class SaveDeepLinkUseCase(
-    private val saveDeepLinkRepository: SaveDeepLinkRepository
+    private val deepLinkDaoRepository: DeepLinkDaoRepository
 ) {
     suspend fun saveDeepLink(deepLinkEntity: DeepLinkEntity) =
-        saveDeepLinkRepository.insertDeepLink(deepLinkEntity)
+        deepLinkDaoRepository.insertDeepLinkOnDao(deepLinkEntity)
 }

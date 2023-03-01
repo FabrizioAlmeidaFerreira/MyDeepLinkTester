@@ -27,25 +27,24 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtInputLayoutDeepLink"
+            style="@style/Theme.MyDeepLinkTester.TextInputLayout"
             android:layout_width="@dimen/size_0"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_32"
             android:layout_marginStart="@dimen/margin_16"
             android:layout_marginEnd="@dimen/margin_16"
+            app:endIconMode="clear_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtInputDeepLink"
+                style="@style/Theme.MyDeepLinkTester.TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="@dimen/size_60"
                 android:hint="@string/mdlt_text_hint_execute"
-                android:textSize="@dimen/text_size_16"
-                android:imeOptions="actionSend"
-                android:inputType="textMultiLine"
-                android:maxLines="20"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black" />
 
@@ -53,10 +52,10 @@
 
         <Button
             android:id="@+id/mdlt_btn_send_deep_link"
+            style="@style/ButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_32"
-            android:textAllCaps="false"
+            android:layout_marginTop="@dimen/margin_16"
             android:text="@string/mdlt_button_send_deep_lnk_label"
             app:layout_constraintEnd_toEndOf="@+id/txtInputLayoutDeepLink"
             app:layout_constraintStart_toStartOf="@+id/txtInputLayoutDeepLink"

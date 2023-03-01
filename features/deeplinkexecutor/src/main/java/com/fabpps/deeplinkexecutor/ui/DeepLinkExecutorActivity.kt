@@ -1,16 +1,24 @@
 package com.fabpps.deeplinkexecutor.ui
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.ParseException
+import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.widget.addTextChangedListener
 import com.fabpps.deeplinkexecutor.R
 import com.fabpps.deeplinkexecutor.databinding.DeepLinkExecutorActivityBinding
 import com.fabpps.deeplinkexecutor.ui.base.BaseInjectActivity
 import com.fabpps.deeplinkexecutor.utils.extensions.setOnClickListenerWithDelay
+import com.fabpps.extensions.nonNullObserver
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DeepLinkExecutorActivity: BaseInjectActivity() {
+class DeepLinkExecutorActivity : BaseInjectActivity() {
 
     private lateinit var binding: DeepLinkExecutorActivityBinding
 
@@ -19,6 +27,17 @@ class DeepLinkExecutorActivity: BaseInjectActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initViews()
+        observeAllDeepLinks()
+    }
+
+    private fun observeAllDeepLinks() {
+        viewModel.allDeepLinks.nonNullObserver(this) {
+            println("All DeepLinks:  $it")
+        }
+    }
+
+    private fun initViews() {
         binding = DeepLinkExecutorActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
@@ -27,10 +46,44 @@ class DeepLinkExecutorActivity: BaseInjectActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+        initButtonExecutor()
+    }
 
+    private fun initButtonExecutor() {
+        changeStateInputEditText()
         binding.mdltBtnSendDeepLink.setOnClickListenerWithDelay {
-            viewModel.saveDeepLink()
+            if (binding.txtInputDeepLink.text?.isNotEmpty() == true)
+                try {
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(binding.txtInputDeepLink.text.toString())
+                        )
+                    )
+                    viewModel.saveDeepLink()
+                    setError(false)
+                } catch (e: ActivityNotFoundException) {
+                    setError(true)
+                } catch (e: ParseException) {
+                    setError(true)
+                }
         }
+    }
+
+    private fun setError(setError: Boolean = false) {
+        binding.txtInputLayoutDeepLink.error =
+            if (setError) getString(R.string.mdlt_button_error)
+            else null
+    }
+
+    private fun changeStateInputEditText() {
+        binding.txtInputDeepLink.addTextChangedListener(
+            onTextChanged = { _, _, _, count ->
+                if (count > 0) {
+                    setError(false)
+                }
+            }
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

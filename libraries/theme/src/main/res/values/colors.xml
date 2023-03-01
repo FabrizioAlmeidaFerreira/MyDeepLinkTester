@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primary_color">#4171D1</color>
-    <color name="color_primary_variant">#224487</color>
+    <color name="primary_color_variant">#224487</color>
+
+    <color name="primary_dark_color">#1B428F</color>
+    <color name="primary_dark_color_variant">#2B3851</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
