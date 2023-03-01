@@ -10,8 +10,6 @@ import kotlinx.coroutines.delay
 
 class MainActivity : AppCompatActivity() {
 
-    //private val mainViewModel: MainViewModel by viewModel()
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,10 +25,4 @@ class MainActivity : AppCompatActivity() {
             ).also { finish() }
         }
     }
-
-    /*private fun getCurrentDeepLink() {
-        binding.mdltBtnSendDeepLink.setOnClickListenerWithDelay {
-            println("Texto digitado = ${binding.txtInputDeepLink.text}")
-        }
-    }*/
 }

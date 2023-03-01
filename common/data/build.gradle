@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.fabpps.core'
+    namespace 'com.fabpps.data'
     compileSdk 33
 
     defaultConfig {
@@ -45,6 +45,4 @@ dependencies {
     implementation 'androidx.room:room-ktx:2.5.0'
     kapt "androidx.room:room-compiler:2.5.0"
     androidTestImplementation "androidx.room:room-testing:2.5.0"
-
-    implementation project(":common:data")
 }
