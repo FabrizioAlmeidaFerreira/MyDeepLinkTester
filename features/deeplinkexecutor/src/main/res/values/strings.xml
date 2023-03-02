@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="mdlt_button_error">erro deep link não encontrou aplicação</string>
+    <string name="mdlt_icon_favorite_description">adicionar aos favoritos</string>
+    <string name="mdlt_icon_favorite_label">favoritos</string>
+    <string name="mdlt_icon_history_label">histórico</string>
 </resources>

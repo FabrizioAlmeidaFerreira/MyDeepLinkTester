@@ -60,6 +60,19 @@
             app:layout_constraintEnd_toEndOf="@+id/txtInputLayoutDeepLink"
             app:layout_constraintStart_toStartOf="@+id/txtInputLayoutDeepLink"
             app:layout_constraintTop_toBottomOf="@+id/txtInputLayoutDeepLink" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDeepLinkList"
+            android:layout_width="@dimen/size_0"
+            android:layout_height="@dimen/size_0"
+            android:layout_marginTop="@dimen/margin_24"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/deep_link_item"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/mdlt_btn_send_deep_link"
+            app:layout_constraintStart_toStartOf="@+id/mdlt_btn_send_deep_link"
+            app:layout_constraintTop_toBottomOf="@+id/mdlt_btn_send_deep_link" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
