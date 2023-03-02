@@ -18,14 +18,14 @@ class DeepLinkExecutorViewModel(
     val allDeepLinks: LiveData<List<DeepLinkEntity>> =
         getAllDeepLinkUseCase.getAllDeepLink().asLiveData()
 
-    fun saveDeepLink() {
+    fun saveDeepLink(deepLinkText: String) {
         viewModelScope.launch {
             saveDeepLinkUseCase.saveDeepLink(
                 DeepLinkEntity(
-                    deepLink = "iti://gestaofinanceira",
-                    deepLinkAlias = "hello word",
+                    deepLink = deepLinkText,
+                    deepLinkAlias = "",
                     deepLinkPosition = 0,
-                    deepLinkDescription = "first description",
+                    deepLinkDescription = "",
                     deepLinkIsFavorite = false
                 )
             )

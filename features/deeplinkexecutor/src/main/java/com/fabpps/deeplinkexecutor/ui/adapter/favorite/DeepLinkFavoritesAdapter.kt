@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.fabpps.data.dto.DeepLinkVO
 import com.fabpps.deeplinkexecutor.R
+import com.fabpps.deeplinkexecutor.domain.interfaces.DeepLinkAdapterListeners
 
 class DeepLinkFavoritesAdapter : RecyclerView.Adapter<DeepLinkFavoriteViewHolder>() {
 
     private var oldDeepLinkList = mutableListOf<DeepLinkVO>()
+    private lateinit var deepLinkAdapterListeners: DeepLinkAdapterListeners
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeepLinkFavoriteViewHolder {
         return DeepLinkFavoriteViewHolder(
@@ -17,7 +19,8 @@ class DeepLinkFavoritesAdapter : RecyclerView.Adapter<DeepLinkFavoriteViewHolder
                 R.layout.deep_link_item,
                 parent,
                 false
-            )
+            ),
+            deepLinkAdapterListeners
         )
     }
 
@@ -26,6 +29,10 @@ class DeepLinkFavoritesAdapter : RecyclerView.Adapter<DeepLinkFavoriteViewHolder
     }
 
     override fun getItemCount(): Int = oldDeepLinkList.count()
+
+    fun setListeners(deepLinkAdapterListeners: DeepLinkAdapterListeners) {
+        this.deepLinkAdapterListeners = deepLinkAdapterListeners
+    }
 
     fun setItemsList(newDeepList: MutableList<DeepLinkVO>) {
         val deepLinDiffUtil = DeepLinkAdapterDiffUtil(oldDeepLinkList, newDeepList)

@@ -5,10 +5,14 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.fabpps.data.dto.DeepLinkVO
 import com.fabpps.deeplinkexecutor.R
+import com.fabpps.deeplinkexecutor.domain.interfaces.DeepLinkAdapterListeners
 import com.fabpps.deeplinkexecutor.utils.extensions.setOnClickListenerWithDelay
 import com.google.android.material.textview.MaterialTextView
 
-class DeepLinkFavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class DeepLinkFavoriteViewHolder(
+    itemView: View,
+    private val deepLinkAdapterListeners: DeepLinkAdapterListeners
+) : RecyclerView.ViewHolder(itemView) {
 
     private val tvDeepLink: MaterialTextView by lazy { itemView.findViewById(R.id.tvDeepLink) }
     private val tvDeepLinkDescription: MaterialTextView by lazy { itemView.findViewById(R.id.tvDeepLinkDescription) }
@@ -17,6 +21,10 @@ class DeepLinkFavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemV
     fun binding(deepLinkVO: DeepLinkVO) {
         tvDeepLink.text = deepLinkVO.deepLink
         tvDeepLinkDescription.text = deepLinkVO.deepLinkDescription
+
+        itemView.setOnClickListenerWithDelay {
+            deepLinkAdapterListeners.onDeepLinkItemSelected(deepLinkVO)
+        }
 
         ivSetFavorite.apply {
             setCurrentFavoriteImage(deepLinkVO.deepLinkIsFavorite)

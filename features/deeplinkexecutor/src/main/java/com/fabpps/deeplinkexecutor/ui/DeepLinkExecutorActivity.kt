@@ -11,6 +11,7 @@ import androidx.core.widget.addTextChangedListener
 import com.fabpps.data.dto.DeepLinkVO
 import com.fabpps.deeplinkexecutor.R
 import com.fabpps.deeplinkexecutor.databinding.DeepLinkExecutorActivityBinding
+import com.fabpps.deeplinkexecutor.domain.interfaces.DeepLinkAdapterListeners
 import com.fabpps.deeplinkexecutor.ui.adapter.favorite.DeepLinkFavoritesAdapter
 import com.fabpps.deeplinkexecutor.ui.base.BaseInjectActivity
 import com.fabpps.deeplinkexecutor.utils.extensions.setOnClickListenerWithDelay
@@ -18,7 +19,7 @@ import com.fabpps.extensions.nonNullObserver
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DeepLinkExecutorActivity : BaseInjectActivity() {
+class DeepLinkExecutorActivity : BaseInjectActivity(), DeepLinkAdapterListeners {
 
     private lateinit var binding: DeepLinkExecutorActivityBinding
 
@@ -35,11 +36,14 @@ class DeepLinkExecutorActivity : BaseInjectActivity() {
 
     private fun observeAllDeepLinks() {
         viewModel.allDeepLinks.nonNullObserver(this) {
-            deepLinkFavoritesAdapter.setItemsList(
-                it.map { listToMap ->
-                    listToMap.toDeepLinkVO()
-                }.toMutableList()
-            )
+            deepLinkFavoritesAdapter.apply {
+                setListeners(this@DeepLinkExecutorActivity)
+                setItemsList(
+                    it.map { listToMap ->
+                        listToMap.toDeepLinkVO()
+                    }.toMutableList()
+                )
+            }
         }
     }
 
@@ -68,7 +72,7 @@ class DeepLinkExecutorActivity : BaseInjectActivity() {
                             Uri.parse(binding.txtInputDeepLink.text.toString())
                         )
                     )
-                    viewModel.saveDeepLink()
+                    viewModel.saveDeepLink(binding.txtInputDeepLink.text.toString())
                     setError(false)
                 } catch (e: ActivityNotFoundException) {
                     setError(true)
@@ -108,5 +112,9 @@ class DeepLinkExecutorActivity : BaseInjectActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDeepLinkItemSelected(deepLinkVO: DeepLinkVO) {
+        binding.txtInputDeepLink.setText(deepLinkVO.deepLink)
     }
 }
