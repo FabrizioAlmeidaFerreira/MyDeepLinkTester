@@ -8,6 +8,6 @@ class RepositoryModules {
     fun provides() = listOf(deepLinkDaoRepository)
 
     private val deepLinkDaoRepository = module {
-        factory { DeepLinkDaoRepository(get()) }
+        single { DeepLinkDaoRepository(get()) }
     }
 }

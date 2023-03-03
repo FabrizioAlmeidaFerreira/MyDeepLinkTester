@@ -17,6 +17,7 @@ class DeepLinkFavoriteViewHolder(
     private val tvDeepLink: MaterialTextView by lazy { itemView.findViewById(R.id.tvDeepLink) }
     private val tvDeepLinkDescription: MaterialTextView by lazy { itemView.findViewById(R.id.tvDeepLinkDescription) }
     private val ivSetFavorite: ImageView by lazy { itemView.findViewById(R.id.ivSetFavorite) }
+    private val ivDelete: ImageView by lazy { itemView.findViewById(R.id.ivDelete) }
 
     fun binding(deepLinkVO: DeepLinkVO) {
         tvDeepLink.text = deepLinkVO.deepLink
@@ -26,10 +27,18 @@ class DeepLinkFavoriteViewHolder(
             deepLinkAdapterListeners.onDeepLinkItemSelected(deepLinkVO)
         }
 
+        ivDelete.setOnClickListenerWithDelay {
+            deepLinkAdapterListeners.onDeleteDeepLink(deepLinkVO)
+        }
+
         ivSetFavorite.apply {
             setCurrentFavoriteImage(deepLinkVO.deepLinkIsFavorite)
 
-            setOnClickListenerWithDelay { setCurrentFavoriteImage(true) }
+            setOnClickListenerWithDelay {
+                deepLinkAdapterListeners.onDeepLinkUpdate(
+                    deepLinkVO = deepLinkVO.copy(deepLinkIsFavorite = !deepLinkVO.deepLinkIsFavorite)
+                )
+            }
         }
     }
 

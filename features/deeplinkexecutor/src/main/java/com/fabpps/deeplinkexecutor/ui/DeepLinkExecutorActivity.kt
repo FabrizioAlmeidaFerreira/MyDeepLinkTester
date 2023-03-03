@@ -34,6 +34,11 @@ class DeepLinkExecutorActivity : BaseInjectActivity(), DeepLinkAdapterListeners 
         observeAllDeepLinks()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.cancelAllJobs()
+    }
+
     private fun observeAllDeepLinks() {
         viewModel.allDeepLinks.nonNullObserver(this) {
             deepLinkFavoritesAdapter.apply {
@@ -116,5 +121,13 @@ class DeepLinkExecutorActivity : BaseInjectActivity(), DeepLinkAdapterListeners 
 
     override fun onDeepLinkItemSelected(deepLinkVO: DeepLinkVO) {
         binding.txtInputDeepLink.setText(deepLinkVO.deepLink)
+    }
+
+    override fun onDeepLinkUpdate(deepLinkVO: DeepLinkVO) {
+        viewModel.updateDeepLink(deepLinkVO)
+    }
+
+    override fun onDeleteDeepLink(deepLinkVO: DeepLinkVO) {
+        viewModel.deleteDeepLink(deepLinkVO)
     }
 }

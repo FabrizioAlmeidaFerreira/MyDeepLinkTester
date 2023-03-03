@@ -10,6 +10,6 @@ class ViewModelModules {
     )
 
     private val deepLinkExecutorViewModel = module {
-        viewModel { DeepLinkExecutorViewModel(get(), get()) }
+        viewModel { DeepLinkExecutorViewModel(get(), get(), get(), get(), get()) }
     }
 }

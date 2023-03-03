@@ -5,20 +5,44 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.fabpps.data.dao.DeepLinkEntity
-import com.fabpps.deeplinkexecutor.domain.usecase.GetAllDeepLinkUseCase
-import com.fabpps.deeplinkexecutor.domain.usecase.SaveDeepLinkUseCase
+import com.fabpps.data.dto.DeepLinkVO
+import com.fabpps.deeplinkexecutor.domain.usecase.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DeepLinkExecutorViewModel(
     private val saveDeepLinkUseCase: SaveDeepLinkUseCase,
-    private val getAllDeepLinkUseCase: GetAllDeepLinkUseCase
+    private val getAllDeepLinkUseCase: GetAllDeepLinkUseCase,
+    private val checkIfExistsDeepLinkUseCase: CheckIfExistsDeepLinkUseCase,
+    private val updateDeepLinkUseCase: UpdateDeepLinkUseCase,
+    private val deleteDeepLinkUseCase: DeleteDeepLinkUseCase
 ) : ViewModel() {
+
+    private val job = Job()
 
     val allDeepLinks: LiveData<List<DeepLinkEntity>> =
         getAllDeepLinkUseCase.getAllDeepLink().asLiveData()
 
-    fun saveDeepLink(deepLinkText: String) {
+    fun saveDeepLink(deepLinkText: String) = checkToSaveOnRoom(deepLinkText)
+
+    private fun checkToSaveOnRoom(deepLinkText: String) {
+        viewModelScope.launch(job + Dispatchers.IO) {
+            checkIfExistsDeepLinkUseCase.invoke(deepLinkText).collect {
+                when {
+                    it.isSuccess -> {
+                        if (it.getOrNull() == true) {
+                            saveOnRoomDeepLink(deepLinkText)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun saveOnRoomDeepLink(deepLinkText: String) {
         viewModelScope.launch {
             saveDeepLinkUseCase.saveDeepLink(
                 DeepLinkEntity(
@@ -32,4 +56,19 @@ class DeepLinkExecutorViewModel(
         }
     }
 
+    fun updateDeepLink(deepLinkVO: DeepLinkVO) {
+        viewModelScope.launch(job + Dispatchers.IO) {
+            updateDeepLinkUseCase.invoke(deepLinkVO.toDeepLinkEntity())
+        }
+    }
+
+    fun deleteDeepLink(deepLinkVO: DeepLinkVO) {
+        viewModelScope.launch(job + Dispatchers.IO) {
+            deleteDeepLinkUseCase.invoke(deepLinkVO.toDeepLinkEntity())
+        }
+    }
+
+    fun cancelAllJobs() {
+        job.cancel()
+    }
 }

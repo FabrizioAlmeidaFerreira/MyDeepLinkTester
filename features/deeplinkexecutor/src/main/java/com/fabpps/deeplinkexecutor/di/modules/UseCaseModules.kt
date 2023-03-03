@@ -1,14 +1,16 @@
 package com.fabpps.deeplinkexecutor.di.modules
 
-import com.fabpps.deeplinkexecutor.domain.usecase.GetAllDeepLinkUseCase
-import com.fabpps.deeplinkexecutor.domain.usecase.SaveDeepLinkUseCase
+import com.fabpps.deeplinkexecutor.domain.usecase.*
 import org.koin.dsl.module
 
 class UseCaseModules {
 
     fun provide() = listOf(
         saveDeepLinkUseCase,
-        getAllDeepLinkUseCase
+        getAllDeepLinkUseCase,
+        checkIfExistsDeepLinkUseCase,
+        updateDeepLinkUseCase,
+        deleteDeepLinkUseCase
     )
 
     private val saveDeepLinkUseCase = module {
@@ -17,5 +19,17 @@ class UseCaseModules {
 
     private val getAllDeepLinkUseCase = module {
         factory { GetAllDeepLinkUseCase(get()) }
+    }
+
+    private val checkIfExistsDeepLinkUseCase = module {
+        factory { CheckIfExistsDeepLinkUseCase(get()) }
+    }
+
+    private val updateDeepLinkUseCase = module {
+        factory { UpdateDeepLinkUseCase(get()) }
+    }
+
+    private val deleteDeepLinkUseCase = module {
+        factory { DeleteDeepLinkUseCase(get()) }
     }
 }
