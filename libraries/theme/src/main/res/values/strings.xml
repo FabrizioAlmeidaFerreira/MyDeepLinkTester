@@ -12,4 +12,7 @@
 
     <string name="mdlt_text_hint_execute">Digite seu deepLink</string>
     <string name="mdlt_button_send_deep_lnk_label">Executar DeepLink</string>
+
+    <string name="mdlt_menu_search">Pesquisar</string>
+    <string name="mdl_check_box_text">fechar ao executar</string>
 </resources>

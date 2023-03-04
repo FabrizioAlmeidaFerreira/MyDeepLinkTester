@@ -10,8 +10,8 @@ interface DeepLinkDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDeepLink(deepLinkEntity: DeepLinkEntity)
 
-    @Query("SELECT * FROM DeepLinkEntity ORDER BY deepLinkId DESC")
-    fun getAllDeepLinks() : Flow<List<DeepLinkEntity>>
+    @Query("SELECT * FROM DeepLinkEntity WHERE deepLink LIKE '%' || :searchQuery || '%' ORDER BY deepLinkId DESC")
+    fun getAllDeepLinks(searchQuery: String) : Flow<List<DeepLinkEntity>>
 
     @Query("SELECT * FROM DeepLinkEntity WHERE deepLink IN (:deepLink)")
     suspend fun getVerifyExistsDeepLink(deepLink: String) : List<DeepLinkEntity>

@@ -1,9 +1,10 @@
-package com.fabpps.deeplinkexecutor.utils.extensions
+package com.fabpps.extensions
 
 import android.os.SystemClock
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import androidx.appcompat.widget.SearchView
 
 
 const val DELAYED_CLICK_TIME = 600L
@@ -26,5 +27,19 @@ fun View.setOnClickListenerWithDelay(delay: Long = DELAYED_CLICK_TIME, listener:
             else listener()
             lastClickedTime = SystemClock.elapsedRealtime()
         }
+    })
+}
+
+inline fun SearchView.onQueryTextChanged(crossinline listener: (String) -> Unit) {
+    this.setOnQueryTextListener(object :SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String?): Boolean {
+            return true
+        }
+
+        override fun onQueryTextChange(newText: String?): Boolean {
+            listener.invoke(newText.orEmpty())
+            return true
+        }
+
     })
 }

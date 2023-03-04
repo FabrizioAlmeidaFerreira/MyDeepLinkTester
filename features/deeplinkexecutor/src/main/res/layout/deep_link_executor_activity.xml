@@ -25,53 +25,85 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txtInputLayoutDeepLink"
-            style="@style/Theme.MyDeepLinkTester.TextInputLayout"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardHoldInput"
             android:layout_width="@dimen/size_0"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_32"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_16"
-            app:endIconMode="clear_text"
+            app:cardElevation="@dimen/margin_8"
+            app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtInputDeepLink"
-                style="@style/Theme.MyDeepLinkTester.TextInputEditText"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="@dimen/size_60"
-                android:hint="@string/mdlt_text_hint_execute"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black" />
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_16"
+                android:layout_marginEnd="@dimen/margin_16">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txtInputLayoutDeepLink"
+                    style="@style/Theme.MyDeepLinkTester.TextInputLayout"
+                    android:layout_width="@dimen/size_0"
+                    android:layout_height="wrap_content"
+                    app:endIconMode="clear_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/mdlt_btn_send_deep_link"
-            style="@style/ButtonStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_16"
-            android:text="@string/mdlt_button_send_deep_lnk_label"
-            app:layout_constraintEnd_toEndOf="@+id/txtInputLayoutDeepLink"
-            app:layout_constraintStart_toStartOf="@+id/txtInputLayoutDeepLink"
-            app:layout_constraintTop_toBottomOf="@+id/txtInputLayoutDeepLink" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtInputDeepLink"
+                        style="@style/Theme.MyDeepLinkTester.TextInputEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/mdlt_text_hint_execute"
+                        android:minHeight="@dimen/size_60"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/mdlt_btn_send_deep_link"
+                    style="@style/ButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:text="@string/mdlt_button_send_deep_lnk_label"
+                    app:layout_constraintEnd_toStartOf="@+id/checkBox"
+                    app:layout_constraintStart_toStartOf="@+id/txtInputLayoutDeepLink"
+                    app:layout_constraintTop_toBottomOf="@+id/txtInputLayoutDeepLink" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="@dimen/size_0"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:text="@string/mdl_check_box_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/mdlt_btn_send_deep_link" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDeepLinkList"
             android:layout_width="@dimen/size_0"
             android:layout_height="@dimen/size_0"
             android:layout_marginTop="@dimen/margin_24"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginEnd="@dimen/margin_8"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/deep_link_item"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/mdlt_btn_send_deep_link"
-            app:layout_constraintStart_toStartOf="@+id/mdlt_btn_send_deep_link"
-            app:layout_constraintTop_toBottomOf="@+id/mdlt_btn_send_deep_link" />
+            app:layout_constraintEnd_toEndOf="@+id/cardHoldInput"
+            app:layout_constraintStart_toStartOf="@+id/cardHoldInput"
+            app:layout_constraintTop_toBottomOf="@+id/cardHoldInput"
+            tools:listitem="@layout/deep_link_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

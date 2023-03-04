@@ -10,7 +10,9 @@ import com.fabpps.deeplinkexecutor.domain.usecase.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 
 class DeepLinkExecutorViewModel(
@@ -23,8 +25,13 @@ class DeepLinkExecutorViewModel(
 
     private val job = Job()
 
-    val allDeepLinks: LiveData<List<DeepLinkEntity>> =
-        getAllDeepLinkUseCase.getAllDeepLink().asLiveData()
+    val searchQuery:  MutableStateFlow<String> = MutableStateFlow<String>("")
+
+    private val taskFlow = searchQuery.flatMapLatest {
+        getAllDeepLinkUseCase.getAllDeepLink(it)
+    }
+
+    val allDeepLinks: LiveData<List<DeepLinkEntity>> = taskFlow.asLiveData()
 
     fun saveDeepLink(deepLinkText: String) = checkToSaveOnRoom(deepLinkText)
 

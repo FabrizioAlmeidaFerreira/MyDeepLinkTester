@@ -6,56 +6,66 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
+    app:cardBackgroundColor="?attr/cardColor"
     app:cardUseCompatPadding="true"
     app:cardElevation="@dimen/margin_2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/margin_16"
-        android:paddingBottom="@dimen/margin_16">
+        android:paddingTop="@dimen/margin_8">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDeepLink"
             style="@style/Theme.MyDeepLinkTester.TextView"
             android:layout_width="@dimen/size_0"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_4"
-            app:layout_constraintEnd_toStartOf="@+id/ivSetFavorite"
+            android:layout_marginStart="@dimen/margin_24"
+            android:layout_marginEnd="@dimen/margin_24"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="iti://gestaofinanceira" />
+            tools:text="iti" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDeepLinkDescription"
+            android:textAppearance="?attr/textAppearanceBody2"
             android:layout_width="@dimen/size_0"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@+id/tvDeepLink"
             app:layout_constraintStart_toStartOf="@+id/tvDeepLink"
-            app:layout_constraintTop_toBottomOf="@+id/tvDeepLink" />
+            app:layout_constraintTop_toBottomOf="@+id/tvDeepLink"
+            tools:text="iti://gestaofinanceira" />
 
-        <ImageView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/ivSetFavorite"
+            style="@style/ButtonCustom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_16"
             android:contentDescription="@string/mdlt_icon_favorite_description"
-            android:src="@drawable/ic_favorite_false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvDeepLink" />
+            app:icon="@drawable/ic_favorite_false"
+            app:layout_constraintEnd_toStartOf="@+id/ivShare"
+            app:layout_constraintTop_toBottomOf="@+id/tvDeepLinkDescription" />
 
-        <ImageView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/ivDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_16"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="@dimen/size_42"
+            android:layout_height="@dimen/size_42"
             android:contentDescription="@string/mdlt_icon_favorite_description"
-            android:src="@drawable/ic_delete"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivSetFavorite" />
+            app:icon="@drawable/ic_delete"
+            app:layout_constraintEnd_toStartOf="@+id/ivSetFavorite"
+            app:layout_constraintTop_toBottomOf="@+id/tvDeepLinkDescription" />
 
-
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/ivShare"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="@dimen/size_42"
+            android:layout_height="@dimen/size_42"
+            android:contentDescription="@string/mdlt_icon_favorite_description"
+            app:icon="@drawable/ic_share_24"
+            app:layout_constraintEnd_toEndOf="@+id/tvDeepLink"
+            app:layout_constraintTop_toBottomOf="@+id/tvDeepLinkDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
