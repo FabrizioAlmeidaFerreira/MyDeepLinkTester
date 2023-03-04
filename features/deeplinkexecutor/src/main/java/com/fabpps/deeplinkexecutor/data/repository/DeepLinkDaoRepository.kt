@@ -10,11 +10,9 @@ class DeepLinkDaoRepository(
     private val dao: DeepLinkRoomDatabase
 ) {
 
-    fun geAllDeepLinks(searchQuery: String): Flow<List<DeepLinkEntity>> {
-        return dao.deepLinkDao().getAllDeepLinks(searchQuery)
+    fun geAllDeepLinks(searchQuery: String, favorites: Boolean = false): Flow<List<DeepLinkEntity>> {
+        return dao.deepLinkDao().getAllDeepLinks(searchQuery, favorites)
     }
-
-    //val allDeepLinks: Flow<List<DeepLinkEntity>> = dao.deepLinkDao().getAllDeepLinks()
 
     @WorkerThread
     suspend fun insertDeepLinkOnDao(deepLinkEntity: DeepLinkEntity) {

@@ -1,12 +1,9 @@
 package com.fabpps.deeplinkexecutor.ui
 
-import android.content.ActivityNotFoundException
-import android.content.Intent
-import android.net.ParseException
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.core.widget.addTextChangedListener
 import com.fabpps.data.dto.DeepLinkVO
@@ -67,6 +64,7 @@ class DeepLinkExecutorActivity : BaseInjectActivity(), DeepLinkAdapterListeners 
                 .setAction("Action", null).show()
         }
         initButtonExecutor()
+        handlerChipFavorites()
     }
 
     private fun initButtonExecutor() {
@@ -110,7 +108,7 @@ class DeepLinkExecutorActivity : BaseInjectActivity(), DeepLinkAdapterListeners 
         val searchView = searchMenu.actionView as SearchView
 
         searchView.onQueryTextChanged {
-            viewModel.searchQuery.value = it
+            viewModel.searchQuery.value = Pair(it, false)
         }
 
         return true
@@ -118,8 +116,21 @@ class DeepLinkExecutorActivity : BaseInjectActivity(), DeepLinkAdapterListeners 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_favorite -> {
+                viewModel.searchQuery.value = Pair("", true)
+                binding.chipFavorites.visibility = View.VISIBLE
+                true
+            }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun handlerChipFavorites() {
+        binding.chipFavorites.apply {
+            setOnCloseIconClickListener {
+                viewModel.searchQuery.value = Pair("", false)
+                visibility = View.GONE
+            }
         }
     }
 

@@ -25,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="iti" />
+            tools:text="MyApp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDeepLinkDescription"
@@ -35,7 +35,7 @@
             app:layout_constraintEnd_toEndOf="@+id/tvDeepLink"
             app:layout_constraintStart_toStartOf="@+id/tvDeepLink"
             app:layout_constraintTop_toBottomOf="@+id/tvDeepLink"
-            tools:text="iti://gestaofinanceira" />
+            tools:text="myapp://users" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/ivSetFavorite"

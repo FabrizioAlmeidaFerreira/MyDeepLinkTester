@@ -7,13 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.fabpps.data.dao.DeepLinkEntity
 import com.fabpps.data.dto.DeepLinkVO
 import com.fabpps.deeplinkexecutor.domain.usecase.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.launch
 
 class DeepLinkExecutorViewModel(
     private val saveDeepLinkUseCase: SaveDeepLinkUseCase,
@@ -25,10 +22,11 @@ class DeepLinkExecutorViewModel(
 
     private val job = Job()
 
-    val searchQuery:  MutableStateFlow<String> = MutableStateFlow<String>("")
+    val searchQuery:  MutableStateFlow<Pair<String, Boolean>> = MutableStateFlow(Pair("", false))
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     private val taskFlow = searchQuery.flatMapLatest {
-        getAllDeepLinkUseCase.getAllDeepLink(it)
+        getAllDeepLinkUseCase.getAllDeepLink(it.first, it.second)
     }
 
     val allDeepLinks: LiveData<List<DeepLinkEntity>> = taskFlow.asLiveData()

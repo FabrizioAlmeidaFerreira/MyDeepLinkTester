@@ -92,6 +92,17 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipFavorites"
+            style="@style/Widget.MaterialComponents.Chip.Entry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_favorites"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/rvDeepLinkList"
+            app:layout_constraintTop_toBottomOf="@+id/cardHoldInput"
+            tools:visibility="visible"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDeepLinkList"
             android:layout_width="@dimen/size_0"
@@ -103,7 +114,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/cardHoldInput"
             app:layout_constraintStart_toStartOf="@+id/cardHoldInput"
-            app:layout_constraintTop_toBottomOf="@+id/cardHoldInput"
+            app:layout_constraintTop_toBottomOf="@+id/chipFavorites"
             tools:listitem="@layout/deep_link_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
