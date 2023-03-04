@@ -83,6 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_16"
                     android:text="@string/mdl_check_box_text"
+                    app:layout_constraintStart_toEndOf="@+id/mdlt_btn_send_deep_link"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/mdlt_btn_send_deep_link" />

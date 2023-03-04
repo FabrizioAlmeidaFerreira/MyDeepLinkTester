@@ -15,6 +15,7 @@ import com.fabpps.deeplinkexecutor.databinding.DeepLinkExecutorActivityBinding
 import com.fabpps.deeplinkexecutor.domain.interfaces.DeepLinkAdapterListeners
 import com.fabpps.deeplinkexecutor.ui.adapter.favorite.DeepLinkFavoritesAdapter
 import com.fabpps.deeplinkexecutor.ui.base.BaseInjectActivity
+import com.fabpps.extensions.executeDeepLinkIntent
 import com.fabpps.extensions.setOnClickListenerWithDelay
 import com.fabpps.extensions.nonNullObserver
 import com.fabpps.extensions.onQueryTextChanged
@@ -72,20 +73,17 @@ class DeepLinkExecutorActivity : BaseInjectActivity(), DeepLinkAdapterListeners 
         changeStateInputEditText()
         binding.mdltBtnSendDeepLink.setOnClickListenerWithDelay {
             if (binding.txtInputDeepLink.text?.isNotEmpty() == true)
-                try {
-                    startActivity(
-                        Intent(
-                            Intent.ACTION_VIEW,
-                            Uri.parse(binding.txtInputDeepLink.text.toString())
-                        )
-                    )
-                    viewModel.saveDeepLink(binding.txtInputDeepLink.text.toString())
-                    setError(false)
-                } catch (e: ActivityNotFoundException) {
-                    setError(true)
-                } catch (e: ParseException) {
-                    setError(true)
-                }
+                executeDeepLinkIntent(
+                    deepLink = binding.txtInputDeepLink.text.toString(),
+                    actionOnExecute = {
+                        viewModel.saveDeepLink(binding.txtInputDeepLink.text.toString())
+                        setError(false)
+                    },
+                    actionOnError = {
+                        setError(true)
+                    },
+                    finish = binding.checkBox.isChecked
+                )
         }
     }
 
