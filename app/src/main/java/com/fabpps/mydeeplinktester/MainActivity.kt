@@ -12,6 +12,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private var receivedText: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -19,10 +21,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         lifecycleScope.launchWhenCreated {
-            delay(1000)
-            startActivity(
-                Intent(this@MainActivity, DeepLinkExecutorActivity::class.java)
-            ).also { finish() }
+            handlerReceivedText()
         }
+    }
+
+    private fun handlerReceivedText() {
+        intent?.let {
+            if (it.action == Intent.ACTION_SEND && "text/plain" == intent.type) {
+                it.getStringExtra(Intent.EXTRA_TEXT)?.let { textReceived ->
+                    receivedText = textReceived
+                }
+            }
+        }
+        startActivity(
+            Intent(this@MainActivity, DeepLinkExecutorActivity::class.java).apply {
+                putExtra("text_received", receivedText)
+            }
+        ).also { finish() }
     }
 }

@@ -1,5 +1,6 @@
 package com.fabpps.deeplinkexecutor.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -16,6 +17,7 @@ import com.fabpps.extensions.executeDeepLinkIntent
 import com.fabpps.extensions.setOnClickListenerWithDelay
 import com.fabpps.extensions.nonNullObserver
 import com.fabpps.extensions.onQueryTextChanged
+import com.fabpps.utils.TEXT_INTENT_RECEIVED
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,6 +34,7 @@ class DeepLinkExecutorActivity : BaseInjectActivity(), DeepLinkAdapterListeners 
 
         initViews()
         observeAllDeepLinks()
+        handlerReceiveIntentText()
     }
 
     override fun onDestroy() {
@@ -130,6 +133,16 @@ class DeepLinkExecutorActivity : BaseInjectActivity(), DeepLinkAdapterListeners 
             setOnCloseIconClickListener {
                 viewModel.searchQuery.value = Pair("", false)
                 visibility = View.GONE
+            }
+        }
+    }
+
+    private fun handlerReceiveIntentText() {
+        intent?.let {
+            it.extras?.run {
+                getString(TEXT_INTENT_RECEIVED, null)?.let {textReceived ->
+                    binding.txtInputDeepLink.setText(textReceived)
+                }
             }
         }
     }
