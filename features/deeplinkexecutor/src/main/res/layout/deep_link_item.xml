@@ -49,7 +49,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/ivDelete"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            style="@style/ButtonCustom"
             android:layout_width="@dimen/size_42"
             android:layout_height="@dimen/size_42"
             android:contentDescription="@string/mdlt_icon_favorite_description"
@@ -59,7 +59,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/ivShare"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            style="@style/ButtonCustom"
             android:layout_width="@dimen/size_42"
             android:layout_height="@dimen/size_42"
             android:contentDescription="@string/mdlt_icon_favorite_description"

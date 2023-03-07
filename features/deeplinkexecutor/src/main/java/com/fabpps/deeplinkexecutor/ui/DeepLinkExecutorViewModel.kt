@@ -7,9 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.fabpps.data.dao.DeepLinkEntity
 import com.fabpps.data.dto.DeepLinkVO
 import com.fabpps.deeplinkexecutor.domain.usecase.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flatMapLatest
 
 class DeepLinkExecutorViewModel(

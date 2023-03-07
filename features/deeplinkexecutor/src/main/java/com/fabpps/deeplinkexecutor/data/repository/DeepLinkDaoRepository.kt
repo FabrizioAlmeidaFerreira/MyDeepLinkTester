@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 class DeepLinkDaoRepository(
     private val dao: DeepLinkRoomDatabase
 ) {
-
+    @WorkerThread
     fun geAllDeepLinks(searchQuery: String, favorites: Boolean = false): Flow<List<DeepLinkEntity>> {
         return dao.deepLinkDao().getAllDeepLinks(searchQuery, favorites)
     }
