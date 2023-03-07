@@ -14,3 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "My Deep Link Tester"
 include ':app'
+include ':features:deeplinkexecutor'
+include ':libraries:theme'
+include ':libraries:core'
+include ':common:data'
