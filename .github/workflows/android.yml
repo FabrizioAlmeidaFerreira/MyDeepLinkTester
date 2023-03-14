@@ -1,38 +1,48 @@
-name: Android CI
+name: Android Github Action
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+  push:
+    branches:
+      - main
 
 jobs:
-  build:
 
+  android-detekt:
+    name: Android Detekt
+    runs-on: ubuntu-latest
+    
+    steps:    
+      - name: Android Detekt
+        uses: natiginfo/action-detekt-all@1.22.0
+     
+  test:
+    needs: [android-detekt]
+    name: Unit Tests
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: gradle
+      - uses: actions/checkout@v1
+      - name: set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+      - name: Run Unit tests
+        run: bash ./gradlew testDebugUnitTest
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
-
-    - name: Run detekt
-      # You may pin to the exact commit or the version.
-      # uses: iwata-n/actions-detekt@9dad1d2df09cfa5b3fd73068581eb6807fc55c46
-      uses: iwata-n/actions-detekt@v1.0.0
-      with:
-        # rule
-        rule: /detekt_rule.xml
-        # result
-        result: ./detekt_result.xml
-        # workdir
-        workdir: .
+  test_report:
+    needs: [test]
+    name: Unit TestsCoverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            test-results/**/*.xml
+            test-results/**/*.trx
